@@ -30,7 +30,7 @@ int seconds;
 int temp;
 const int buttonPin = 2;
 int buttonState = 0;
-bool buttonvar = false;
+int buttonvar = 1;
 const int SCREEN_WIDTH = 64;
 int savedBPM = 0;
 
@@ -66,13 +66,18 @@ void setup() {
 void loop(void) {
   buttonState = digitalRead(buttonPin);
 
+  Serial.println(buttonvar);
   //  Om man trycker på knappen byter buttonState mellan true och false. Delay är där för att man inte ska kunna trycka flera gånger när man bara vill trycka en gång.
-  if (buttonState == HIGH) {
-    buttonvar = !buttonvar;
+  if (buttonState == HIGH && buttonvar != 3) {
+    buttonvar += 1;
+    delay (100);
+  }
+  else if (buttonState == HIGH && buttonvar == 3) {
+    buttonvar = 1;
     delay (100);
   }
 
-  if (buttonvar == true) {
+  if (buttonvar == 3) {
     // Refresh picture
     oled.firstPage();
     do {
@@ -81,7 +86,7 @@ void loop(void) {
 
   }
 
-  if (buttonvar == 200) {
+  if (buttonvar == 2) {
     oled.firstPage();
     do {
       drawtemp();
@@ -90,7 +95,7 @@ void loop(void) {
   }
 
   //Om buttonvar är false kommer tiden visas
-  if (buttonvar == false) {
+  if (buttonvar == 1) {
     // Refresh picture
     oled.firstPage();
     do {
