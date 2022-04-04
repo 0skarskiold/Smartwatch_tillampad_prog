@@ -1,5 +1,7 @@
 //Fixa så att man kan byta mellan de olika funktionerna
 //Easter eggs: Garmin i början, varning vid hög puls
+//kan printa allt på en sträng
+//kan fixa så att allt är typ centrerat
 
 
 //Importerar bibliotek
@@ -31,7 +33,7 @@ int temp;
 const int buttonPin = 2;
 int buttonState = 0;
 int buttonvar = 1;
-const int SCREEN_WIDTH = 64;
+const int SCREEN_WIDTH = 128;
 int savedBPM = 0;
 
 //Variablerna från pulsprogrammet
@@ -66,7 +68,7 @@ void setup() {
 void loop(void) {
   buttonState = digitalRead(buttonPin);
 
-  Serial.println(buttonvar);
+  //Serial.println(buttonvar);
   //  Om man trycker på knappen byter buttonState mellan true och false. Delay är där för att man inte ska kunna trycka flera gånger när man bara vill trycka en gång.
   if (buttonState == HIGH && buttonvar != 3) {
     buttonvar += 1;
@@ -182,12 +184,7 @@ void drawpulse(void) {
   }
   else {
     int textPosition = (SCREEN_WIDTH - strlen((String(savedBPM).c_str()))) / 2;
-    oled.drawStr(textPosition, 37, String(savedBPM).c_str());
+    oled.drawStr(textPosition, 38, String(savedBPM).c_str());
   }
   delay(20);                    // considered best practice in a simple sketch.
 }
-
-
-
-
-
