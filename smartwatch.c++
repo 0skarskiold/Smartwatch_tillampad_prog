@@ -25,7 +25,7 @@ RtcDS3231<TwoWire> rtcModule(Wire);
 PulseSensorPlayground pulseSensor;
 
 
-// Skapar variabler. Behöver de ha const framför sig?
+// Skapar variabler. 
 int hours;
 int minutes;
 int seconds;
@@ -79,6 +79,7 @@ void loop(void) {
     delay (100);
   }
 
+  //Om buttonvar är 2 kommer pulsen visas 
   if (buttonvar == 3) {
     // Refresh picture
     oled.firstPage();
@@ -88,6 +89,7 @@ void loop(void) {
 
   }
 
+  //Om buttonvar är 2 kommer temperaturen visas 
   if (buttonvar == 2) {
     oled.firstPage();
     do {
@@ -96,7 +98,7 @@ void loop(void) {
 
   }
 
-  //Om buttonvar är false kommer tiden visas
+  //Om buttonvar är 1 kommer tiden visas
   if (buttonvar == 1) {
     // Refresh picture
     oled.firstPage();
